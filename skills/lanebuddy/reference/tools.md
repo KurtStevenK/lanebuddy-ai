@@ -91,7 +91,7 @@
 | `lanebuddy_routes_settings` | network | no | yes | Sets which route changes become notifications (off, alerts, all) and which adapters are muted. Takes confirm=true; without it, only a preview. |
 | `lanebuddy_routes_snapshot_save` | network | no | no | Saves the routing table now as a snapshot, with a note, for a later diff. |
 | `lanebuddy_routes_snapshot_delete` | network | no | yes | Deletes one saved routing-table snapshot. Takes confirm=true; without it, only a preview. |
-| `lanebuddy_sensors_limits` | hardware | no | yes | Sets the temperature limits in °C (30 to 120) above which a sensor is a finding: cpu, board, gpu, disk. Takes confirm=true; without it, only a preview. Needs the Max tier. |
+| `lanebuddy_sensors_limits` | hardware | no | yes | Sets the temperature limits in °C (30 to 120) above which a sensor is a finding, per kind (cpu, board, gpu, disk) and, with device_name and device_limit, for one device, which wins over its kind's limit. Read lanebuddy_sensors first; a kind left out keeps its value. Takes confirm=true; without it, only a preview. Needs the Max tier. |
 | `lanebuddy_sensors_drives` | hardware | no | yes | Sets the drive readers: auto, on or off; the helper restarts. Takes confirm=true; without it, only a preview. Needs the Max tier. |
 | `lanebuddy_files_settings` | files | no | yes | Switches the file index on or off, and whether every file is hashed (hash_all) or only programs. Takes confirm=true; without it, only a preview. Needs the Max tier. |
 | `lanebuddy_files_walk` | files | no | no | Starts a walk of the file index now, over the given folders or the fixed drives, at background priority. Needs the Max tier. |
