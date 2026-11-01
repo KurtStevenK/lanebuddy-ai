@@ -40,6 +40,7 @@
 | `lanebuddy_tunnel_key_status` | settings | yes | no | Whether a tunnel key is set (a sender from outside must know it), how it is sealed, and the refused senders. The key itself is never returned. |
 | `lanebuddy_lanny_list` | settings | yes | no | Lanny, the saved SSH connections: name, host, port, user, note, last use; and whether an ssh client and a terminal were found. Opening one is for the user, not the agent. |
 | `lanebuddy_console` | status | yes | no | LaneBuddy's own console: the banner and the newest stats lines. |
+| `lanebuddy_agents` | settings | yes | no | What AI agents did here: the calls today and since start, the last call, the last changes an agent made with their arguments, whether lane-mcp sits beside the engine, and the snippets that connect Claude Code, Codex and Cursor. |
 | `lanebuddy_countries` | network | yes | no | The Countries page: home, and for each country the lookups led to, the count, blocked, names, programs, first and last seen, busiest hosts and networks, and any country block. |
 | `lanebuddy_geo_status` | network | yes | no | The built-in address table: ready, ranges, networks, countries, and its date. |
 | `lanebuddy_geo_countries` | network | yes | no | Every country of the address table with its code, name and ranges; for the code a country block needs. |

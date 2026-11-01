@@ -62,7 +62,7 @@ For a demo of blocking: `lanebuddy_devices_list` first, pick a device the user n
 
 ```bash
 claude mcp add --transport stdio lanebuddy -- lane-mcp     # Claude Code
-npx skills add KurtStevenK/Lane --skill lanebuddy           # this skill, into Claude Code, Codex, Cursor and others
+npx skills add KurtStevenK/lanebuddy-ai --skill lanebuddy           # this skill, into Claude Code, Codex, Cursor and others
 ```
 
 Codex: `[mcp_servers.lanebuddy] command = "lane-mcp"` in `config.toml`. Cursor: `{ "mcpServers": { "lanebuddy": { "command": "lane-mcp" } } }`; the `/lanebuddy` command comes from [commands/lanebuddy.md](commands/lanebuddy.md). `lane-mcp` ships beside LaneBuddy and finds the running engine by itself; `lane-mcp --check` says what it found.

@@ -262,7 +262,7 @@ Agent: `lanebuddy_sensors` (with `history`), `lanebuddy_gpu`, `lanebuddy_syslog`
 - **Language**: ten, each shown in its own name. **8-bit sounds**: on by default at full volume, a sound per tap from the sound box, a fanfare every fifth tap, twelve favourites playing in turn; saved settings stay as they are.
 - **Activity file**: **Back up activity** saves a copy in LaneBuddy's backups folder; **Restore last backup** brings the newest copy back after a restart. After a power cut LaneBuddy checks its activity file and repairs it by itself; a damaged file is kept in the damaged folder, nothing is deleted. **Check now** runs the check in the background. The data folder is `%LOCALAPPDATA%\Lane`, `~/Library/Application Support/Lane` (or `/Library/Application Support/Lane` for the daemon), or `~/.local/share/lane` (or `/var/lib/lane` as root); `LANE_DATA_DIR` overrides it.
 - **Test**: asks LaneBuddy for the addresses of two websites, to check that it answers.
-- **AI agents**: how to connect Claude Code, Codex or Cursor (chapter 14).
+- **AI agents**: whether `lane-mcp` sits beside the engine and where, the calls agents made today, the last changes an agent made, and the snippets that connect Claude Code, Codex or Cursor, with copy buttons (chapter 14). Every change an agent makes also shows in the Overview's Recent events with an "agent" badge and on the console.
 
 ### Console
 
@@ -272,7 +272,7 @@ Lane Buddy's own console: the banner and the newest stats lines, from `console-b
 
 Saved SSH connections in PuTTY's spirit: a name, a host, a port, a user, an optional key file and a note. **Open** starts the system's own ssh client in a terminal window of its own with those fields as arguments; no shell runs behind the dashboard, and no password is kept here, ever (leave the key empty and ssh asks in its own window). A colour scheme to paste into Windows Terminal's settings once, so every Lanny session opens in LaneBuddy's colours. An agent may list the connections; opening one is for the user.
 
-Agent: `lanebuddy_settings_get`, `lanebuddy_update_status`, `lanebuddy_tunnel_key_status`, `lanebuddy_lanny_list`, `lanebuddy_console`; `lanebuddy_settings_set`, `lanebuddy_store_check`, `lanebuddy_update_check`, `lanebuddy_update_settings`. The tunnel key and the VirusTotal key are not reachable through an agent.
+Agent: `lanebuddy_settings_get`, `lanebuddy_update_status`, `lanebuddy_tunnel_key_status`, `lanebuddy_lanny_list`, `lanebuddy_console`, `lanebuddy_agents`; `lanebuddy_settings_set`, `lanebuddy_store_check`, `lanebuddy_update_check`, `lanebuddy_update_settings`. The tunnel key and the VirusTotal key are not reachable through an agent.
 
 ## 13. Protection profiles and the lists
 
@@ -324,14 +324,14 @@ Cursor, in the user or project MCP settings:
 { "mcpServers": { "lanebuddy": { "command": "lane-mcp" } } }
 ```
 
-`lane-mcp --check` says which engine it found and reads the overview once; `--print-tools` writes the table below. `LANE_MCP_GROUPS=status,docs` limits what an agent sees to those groups; the pseudo-group `read` drops every tool that changes something. The manual is also published as MCP resources: `lanebuddy://manual`, one per chapter (`lanebuddy://manual/6`), and `lanebuddy://api`.
+`lane-mcp --check` says which engine it found and reads the overview once; `--print-tools` writes the table below. The engine knows an agent by the `User-Agent` lane-mcp sends: the Settings card "AI agents" counts the calls and lists the last changes with their arguments, the Overview's Recent events shows each change with an "agent" badge as it happens, and the console prints a line; so the user always sees what an agent did. `LANE_MCP_GROUPS=status,docs` limits what an agent sees to those groups; the pseudo-group `read` drops every tool that changes something. The manual is also published as MCP resources: `lanebuddy://manual`, one per chapter (`lanebuddy://manual/6`), and `lanebuddy://api`.
 
 ### The `/lanebuddy` skill
 
-A skill tells the agent which tool answers which sentence, how to confirm, and how to answer short. It is in `skills/lanebuddy` of the repository and installs into Claude Code, Codex, Cursor and the other agents the skills CLI knows:
+A skill tells the agent which tool answers which sentence, how to confirm, and how to answer short. It is in `skills/lanebuddy` of the public repository [KurtStevenK/lanebuddy-ai](https://github.com/KurtStevenK/lanebuddy-ai) and installs into Claude Code, Codex, Cursor and the other agents the skills CLI knows:
 
 ```bash
-npx skills add KurtStevenK/Lane --skill lanebuddy
+npx skills add KurtStevenK/lanebuddy-ai --skill lanebuddy
 ```
 
 Then `/lanebuddy how is my system doing` in Claude Code or Cursor (Cursor's command comes from `commands/lanebuddy.md` in the skill), or a plain question in any of them: the skill's description makes the agent reach for it when the user asks about the system, the network, a block, or a program.
@@ -413,6 +413,7 @@ Generated by `lane-mcp --print-tools`; a test keeps this copy and the binary's t
 | `lanebuddy_tunnel_key_status` | settings | yes | no | Whether a tunnel key is set (a sender from outside must know it), how it is sealed, and the refused senders. The key itself is never returned. |
 | `lanebuddy_lanny_list` | settings | yes | no | Lanny, the saved SSH connections: name, host, port, user, note, last use; and whether an ssh client and a terminal were found. Opening one is for the user, not the agent. |
 | `lanebuddy_console` | status | yes | no | LaneBuddy's own console: the banner and the newest stats lines. |
+| `lanebuddy_agents` | settings | yes | no | What AI agents did here: the calls today and since start, the last call, the last changes an agent made with their arguments, whether lane-mcp sits beside the engine, and the snippets that connect Claude Code, Codex and Cursor. |
 | `lanebuddy_countries` | network | yes | no | The Countries page: home, and for each country the lookups led to, the count, blocked, names, programs, first and last seen, busiest hosts and networks, and any country block. |
 | `lanebuddy_geo_status` | network | yes | no | The built-in address table: ready, ranges, networks, countries, and its date. |
 | `lanebuddy_geo_countries` | network | yes | no | Every country of the address table with its code, name and ranges; for the code a country block needs. |
