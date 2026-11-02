@@ -48,6 +48,8 @@ LaneBuddy runs on this computer. It answers the computer's DNS through block lis
 
 **"Any virus", "scan"** → `lanebuddy_av_status` and `lanebuddy_vt_status`; `lanebuddy_av_run what=scan` starts a pass (confirm).
 
+**"Is something injected", "what runs inside program X", "threads"** → `lanebuddy_threads_overview` for the remote threads and the checks' alerts, `lanebuddy_threads_programs` for every program's shield, `lanebuddy_threads_program pid=N` for one program's threads, modules and memory. `lanebuddy_threads_scan pid=N` checks one again now. Suspending a thread, the protection switches and hardening (`lanebuddy_threads_thread`, `lanebuddy_threads_settings`, `lanebuddy_threads_harden`) change the computer: preview first, and only on the user's word.
+
 **"Trace to X"** → `lanebuddy_trace target=X` (waits for the hops).
 
 **"How hot", "sensors"** → `lanebuddy_sensors`; the hot ones are marked.
